@@ -74,7 +74,6 @@ def parse_contents(contents, filename):
         # })
     ])
 
-
 @app.callback(Output('output-image-upload', 'children'),
               [Input('upload-image', 'contents'),
                Input('upload-image', 'filename')])
