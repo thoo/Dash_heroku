@@ -9,7 +9,9 @@ my_hr_style={
                 #'border-width' : '4px',
                 'border-top': '2px solid #21ABCD',
                 'margin-top': '0.5rem',
-                'margin-bottom': '0.5rem'
+                'margin-bottom': '0.5rem',
+                'margin-left': 'auto',
+                'margin-right': 'auto'
             }
 app = dash.Dash()
 
@@ -42,9 +44,9 @@ app.layout = html.Div([
             'borderColor': '#007FFF',
             #'backgroundColor':'rgb(242, 242, 242)',
             'textAlign': 'center',
-            
+
             #'marginLeft':'10px',
-            
+
             'margin': 'auto'
             #'padding': '10px 100px 10px 200px'
         },
@@ -60,12 +62,17 @@ app.layout = html.Div([
 
 def parse_contents(contents, filename):
     return html.Div([
-        html.H5(filename),
+        html.H5(filename, style={
+            'textAlign': 'center',
+            'color': 'black',
+            'margin-top': '1.0rem',
+            'margin-bottom': '1.0rem'
+        }),
         #html.H6(datetime.datetime.fromtimestamp(date)),
 
         # HTML images accept base64 encoded strings in the same format
         # that is supplied by the upload
-        html.Img(src=contents),
+        html.Img(src=contents, style = { 'margin' : 'auto', 'display': 'block'}),
         html.Hr(style=my_hr_style),
         #html.Div('Raw Content'),
         # html.Pre(contents[0:200] + '...', style={
@@ -80,7 +87,7 @@ def parse_contents(contents, filename):
                #Input('upload-image', 'last_modified')])
 def update_output(list_of_contents, list_of_names):
     if list_of_contents is not None:
-        children = [ parse_contents(c, n) for c, n in 
+        children = [ parse_contents(c, n) for c, n in
             zip(list_of_contents, list_of_names)]
         return children
 
@@ -90,4 +97,4 @@ app.css.append_css({
 })
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8818)
