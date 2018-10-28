@@ -111,8 +111,9 @@ def parse_contents(contents, filename):
             html.Img(src=contents, style = { 'margin' : 'auto', 'display': 'block'}),
             html.Hr(style=my_hr_style),
             ]),
-        html.Div(
-            layout_plot([encoded_img])
+        html.Div([
+            html.Div(
+                layout_plot([encoded_img]),
             # html.Img(src=encoded_img, style={ 'margin' : 'auto', 'display': 'block'}),
             # html.Hr(style=my_hr_style),
         #html.Div('Raw Content'),
@@ -120,7 +121,12 @@ def parse_contents(contents, filename):
         #     'whiteSpace': 'pre-wrap',
         #     'wordBreak': 'break-all'
         # })
-            )#
+                className="six columns"),
+            html.Div(
+                layout_plot([contents]),
+                className="six columns"),
+        ],className="row")
+        #
     ])
 
 @app.callback(Output('output-image-upload', 'children'),
